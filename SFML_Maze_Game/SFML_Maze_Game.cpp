@@ -8,7 +8,8 @@ const int LY = 23; // размер лабиринта по вертикали
 const int LX = 28; // размер лабиринта по горизонтали
 const int sprSize = 24; // размер спрайта в пикселах
 const int dashboardSprSize = 48; // размер спрайтов информационных сообщений
-const int spritesCount = 9; //Количество спрайтов
+const int spritesCount = 11; //Количество спрайтов
+
 
 int maze[LY][LX] = { // это наш лабиринт, структура та же
 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -47,6 +48,8 @@ sf::Clock gameClock; // таймер
 
 sf::Vector2f scoreTextPosition, timeTextPosition; // позиция текста для счета и текста для времени
 
+int step = 0;
+
 struct PlayerPosition // структура, в которой храним позицию игрока
 {
 	int x, y; // координаты х и у игрока
@@ -72,7 +75,9 @@ std::string textureNames[spritesCount]{ // объявляем массив ст�
 "assets\\bitmaps\\diamond.png",
 "assets\\bitmaps\\time.png",
 "assets\\bitmaps\\mine.png",
-"assets\\bitmaps\\mine.png"
+"assets\\bitmaps\\mine.png",
+"assets\\bitmaps\\money2.png",
+"assets\\bitmaps\\diamond2.png"
 };
 
 // Объекты фонового изображения
@@ -104,6 +109,7 @@ void UpdateScore(int score)
 {
 	dashboardText.setString(to_string(score)); // устанавливаем текст для вывода to_string переводит число в строковое представление
 	dashboardText.setPosition(scoreTextPosition); // устанавливаем позицию текста для счета
+	dashboardText.setFillColor(sf::Color::Yellow);
 	window.draw(dashboardText); // отрисовываем текст в буфере кадра
 }
 
@@ -116,6 +122,7 @@ void UpdateClock(sf::Time elapsed)
 	if (gameTime.asSeconds() < 0) // проверяем, закончилось ли время
 		// gameTime.asSeconds() - превращает время из объекта Time в секунды
 	{
+		timerTexture.loadFromFile(timerImage);	// отрисовываем таймер, если во время окончания лабиринта он мигал
 		gameState = 2; // если да, то обновляем статус игры на 2 - игрок ПРОИГРАЛ
 	}
 	else
@@ -124,6 +131,18 @@ void UpdateClock(sf::Time elapsed)
 		// устанавливаем текст для вывода to_string переводит число в строковое представление
 		// для получения времени в секундах используем функцию asSeconds. Она возвращает float
 		// поэтому явно преобразуем ее в int, иначе возможны десятичные дроби при выводе оставшегося времени
+		if (gameTime.asSeconds() > 15)
+		{
+			dashboardText.setFillColor(sf::Color::Green);
+		}
+		else
+		{
+			dashboardText.setFillColor(sf::Color::Red);
+			if ((step % 10) >= 5)
+				timerTexture.loadFromFile(textureNames[0]);
+			else
+				timerTexture.loadFromFile(timerImage);
+		}
 		dashboardText.setString(to_string((int)gameTime.asSeconds()));
 		window.draw(dashboardText); // отрисовываем текст в буфере кадра
 	}
@@ -196,9 +215,9 @@ void RedrawMaze(int maze[LY][LX], int width, int height)
 	sf::Vector2u wSize = window.getSize();
 	// как найти позицию х верхнего левого угла лабиринта внутри окна?
 	// надо размер окна поделить на 2 и вычесть из полученного значения половину ширины лабиринта
-	unsigned int xMaze = wSize.x / 2 - LX * sprSize / 2;
+	int xMaze = wSize.x / 2 - LX * sprSize / 2;
 	// аналогично поступаем с у
-	unsigned int yMaze = wSize.y / 2 - LY * sprSize / 2;
+	int yMaze = wSize.y / 2 - LY * sprSize / 2;
 	// далее используем эти координаты в качестве базовой точки при выводе лабиринта
 
 	for (int j = 0; j < height; j++)
@@ -210,7 +229,13 @@ void RedrawMaze(int maze[LY][LX], int width, int height)
 			// Задаем спрайту позицию в окне. Позиция равна по х - номеру текущего столбца
 			// умноженного на размер спрайта по горизонтали. По у - номеру строки, умноженному
 			// на размер спрайта по вертикали
+
+			if (index == 4 || index == 5)	// блеск монет и алмазов
+				if (step % 10 < 5)
+					index += 5;
+
 			sprites[index].setPosition(sf::Vector2f(xMaze + i * sprSize, yMaze + j * sprSize));
+
 			// отрисовываем спрайт
 			if (index > 0) window.draw(sprites[index]);
 		}
@@ -245,6 +270,7 @@ void Move(int dx, int dy)
 			{
 			case 2: // если выход - даем 500 бонусов и меняем статус игры на ВЫИГРЫШ
 				score += 500; // увеличиваем бонусы
+				timerTexture.loadFromFile(timerImage);	// отрисовываем таймер, если во время окончания лабиринта он мигал
 				gameState = 1;
 				break;
 			case 4: // если монета - добавляем 100 бонусов
@@ -379,6 +405,7 @@ int main()
 			while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); // ожидаем нажатия клавиши Escape
 			window.close(); // закрываем окно
 		}
+		step++;	// увеличиваем шаг игры
 		window.clear(); // очищаем окно
 		HandleKeyboardEvents(); // обработка событий клавиатуры
 		RenderScene(); // формируем (рендерим) сцену

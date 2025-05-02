@@ -150,11 +150,13 @@
   <ItemGroup>
     <Image Include="assets\background\background.jpg" />
     <Image Include="assets\bitmaps\diamond.png" />
+    <Image Include="assets\bitmaps\diamond2.png" />
     <Image Include="assets\bitmaps\Door.png" />
     <Image Include="assets\bitmaps\empty.png" />
     <Image Include="assets\bitmaps\Man.png" />
     <Image Include="assets\bitmaps\mine.png" />
     <Image Include="assets\bitmaps\money.png" />
+    <Image Include="assets\bitmaps\money2.png" />
     <Image Include="assets\bitmaps\score.png" />
     <Image Include="assets\bitmaps\time.png" />
     <Image Include="assets\bitmaps\timer.png" />
