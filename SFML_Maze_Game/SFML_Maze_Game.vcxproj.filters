@@ -20,21 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\bitmaps\Door.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="assets\bitmaps\empty.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="assets\bitmaps\Man.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="assets\bitmaps\money.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="assets\bitmaps\wall.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
     <Image Include="assets\bitmaps\score.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
@@ -42,6 +27,21 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="assets\background\background.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\Door.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\empty.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\Man.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\money.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\wall.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

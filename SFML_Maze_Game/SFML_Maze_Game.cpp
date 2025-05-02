@@ -4,40 +4,43 @@
 
 using namespace std;
 
-const int LY = 20; // размер лабиринта по вертикали
-const int LX = 20; // размер лабиринта по горизонтали
+const int LY = 23; // размер лабиринта по вертикали
+const int LX = 28; // размер лабиринта по горизонтали
 const int sprSize = 24; // размер спрайта в пикселах
 const int dashboardSprSize = 48; // размер спрайтов информационных сообщений
 const int spritesCount = 5; //Количество спрайтов
 
 int maze[LY][LX] = { // это наш лабиринт, структура та же
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,1,1,4,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,2},
-	{1,1,0,0,1,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1},
-	{1,1,0,1,1,1,1,1,4,1,1,1,1,4,0,0,0,0,1,1},
-	{1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1},
-	{1,1,0,1,0,0,0,1,0,1,1,1,1,1,0,1,1,1,1,1},
-	{1,1,0,1,0,0,1,1,0,1,1,1,1,1,0,0,1,1,1,1},
-	{1,1,0,1,4,0,1,1,0,1,1,1,1,1,0,0,1,1,1,1},
-	{1,1,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,1,1},
-	{1,1,0,1,0,0,1,1,0,0,0,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1},
-	{1,1,1,1,0,1,1,1,0,0,0,0,0,0,4,1,1,1,0,1},
-	{1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1},
-	{1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,0,0,0,0,1},
-	{1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1},
-	{1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
-	{1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1},
-	{1,1,1,1,0,1,0,0,0,0,0,0,3,1,1,1,1,1,1,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+{1,1,4,4,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,2,0,0,0,0,0,1,1,1},
+{1,1,0,0,4,1,1,1,0,0,1,1,1,0,1,1,0,0,1,4,4,1,1,1,0,4,1,1},
+{1,1,0,1,1,1,1,1,4,1,1,1,1,4,0,0,0,0,1,1,1,1,1,1,0,1,1,1},
+{1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,4,4,1,1,1,0,1,1,1},
+{1,1,0,1,0,0,4,1,0,1,1,1,1,1,0,1,1,1,1,4,0,1,1,1,0,1,1,1},
+{1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,4,1,1,1,0,0,0,0,1,0,1,1,1},
+{1,1,0,1,4,0,1,1,0,1,1,1,1,1,0,4,1,1,1,1,1,1,0,0,0,1,1,1},
+{1,1,0,1,1,0,4,1,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,1,1,1},
+{1,1,0,1,0,0,1,1,0,0,0,1,1,1,1,1,1,1,4,1,1,1,1,1,0,1,1,1},
+{1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,4,1,1},
+{1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,4,1,1,0,1,1,1},
+{1,0,1,1,0,1,1,1,0,0,0,0,0,0,4,1,1,1,0,0,0,0,1,1,0,1,1,1},
+{1,0,0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,0,4,1,1},
+{1,1,0,1,0,1,1,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
+{1,0,0,1,0,1,1,1,0,1,1,1,1,4,1,1,1,0,1,1,1,0,1,1,0,1,1,1},
+{1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,1,1,0,1,1,1},
+{1,0,0,1,0,1,1,1,1,1,1,1,0,1,1,1,1,0,1,4,1,0,1,1,0,1,1,1},
+{1,1,0,1,0,1,0,0,0,0,4,0,0,1,1,1,1,0,0,0,1,0,1,1,0,1,1,1},
+{1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,0,4,1,0,1,1,1},
+{1,4,0,1,0,1,1,1,1,1,1,1,1,4,1,1,1,1,1,4,1,1,1,1,0,4,1,1},
+{1,4,4,1,3,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 };
 
 // переменные их консольной версии игры
 int score = 0; // счет игры
 
-int gameState = 0; // 0 - игра продолжается, 1 - выигрыш, 2 - закончилось время
-sf::Time timeLimit = sf::milliseconds(60000); // лимит игры в миллисекундах
+int gameState = 0; // 0 - игра продолжается, 1 - выигрыш, 2 - закончилось время, 3 - не валидный лабиринт
+sf::Time timeLimit = sf::milliseconds(90000); // лимит игры в миллисекундах
 sf::Time gameTime; // оставшееся время
 sf::Time elapsedTime; // счетчик прошедшего времени
 sf::Clock gameClock; // таймер
@@ -49,24 +52,23 @@ struct PlayerPosition // структура, в которой храним по
 	int x, y; // координаты х и у игрока
 };
 
-PlayerPosition playerPos{ 12, 18 }; // объявляем переменную, которая будет хранить позицию игрока
-					// это структура PlayerPosition с полями х и у
-					// в этом варианте игры будем хранить ее именно так
-					// Позиция фиксированная для любого лабиринта. Вы это должны будете исправить
+PlayerPosition playerPos; // объявляем переменную, которая будет хранить позицию игрока
+// это структура PlayerPosition с полями х и у
+// в этом варианте игры будем хранить ее именно так
 
 // объявляем окно, в которой отображается игра. Задаем размер, кратный размеру спрайта и заголовок окна
 sf::RenderWindow window(sf::VideoMode(800, 688), "SFML maze game");
 
 // Объекты игры
-sf::Texture textures[spritesCount];    // это массив для хранения текстур
-sf::Sprite sprites[spritesCount];      // это массив для спрайтов, при этом позиция каждого спрайта в массиве соответствует кодировке в матрице maze
+sf::Texture textures[spritesCount]; // это массив для хранения текстур
+sf::Sprite sprites[spritesCount]; // это массив для спрайтов, при этом позиция каждого спрайта в массиве соответствует кодировке в матрице maze
 
-std::string textureNames[spritesCount] {  // объявляем массив строк для хранения имен файлов, которые хранят текстуры
-	"assets\\bitmaps\\empty.bmp",
-	"assets\\bitmaps\\wall.bmp",
-	"assets\\bitmaps\\door.bmp",
-	"assets\\bitmaps\\man.bmp",
-	"assets\\bitmaps\\money.bmp"
+std::string textureNames[spritesCount]{ // объявляем массив строк для хранения имен файлов, которые хранят текстуры
+"assets\\bitmaps\\empty.png",
+"assets\\bitmaps\\wall.png",
+"assets\\bitmaps\\door.png",
+"assets\\bitmaps\\man.png",
+"assets\\bitmaps\\money.png"
 };
 
 // Объекты фонового изображения
@@ -105,15 +107,15 @@ void UpdateScore(int score)
 void UpdateClock(sf::Time elapsed)
 {
 	gameTime = timeLimit - elapsed; /* вычисляем оставшееся время в секундах
-					timeLimit - лимит времени, elapsed - прошедшее время с момента старта игры 
-					*/
+	timeLimit - лимит времени, elapsed - прошедшее время с момента старта игры
+	*/
 	if (gameTime.asSeconds() < 0) // проверяем, закончилось ли время
-									// gameTime.asSeconds() - превращает время из объекта Time в секунды
+		// gameTime.asSeconds() - превращает время из объекта Time в секунды
 	{
 		gameState = 2; // если да, то обновляем статус игры на 2 - игрок ПРОИГРАЛ
 	}
 	else
-	{   // если время осталось
+	{ // если время осталось
 		dashboardText.setPosition(timeTextPosition); // устанавливаем позицию текста для счета
 		// устанавливаем текст для вывода to_string переводит число в строковое представление
 		// для получения времени в секундах используем функцию asSeconds. Она возвращает float
@@ -164,9 +166,9 @@ void PrepareFonts(string headerFontName, string dashboardFontName)
 	headerFont.loadFromFile(headerFontName); // загружаем шрифт
 	headerText.setFont(headerFont); // устанавливаем шрифт для текста
 	headerText.setCharacterSize(45); // устанавливаем размер символов
-	headerText.setString("MAZE GAME");  // задаем строку текста для отображения
+	headerText.setString("MAZE GAME"); // задаем строку текста для отображения
 	headerText.setFillColor(sf::Color(255, 0, 0, 200)); // устанавливаем цвет Красный и прозрачность
-	headerText.setStyle(sf::Text::Bold);  // делаем шрифт жирным
+	headerText.setStyle(sf::Text::Bold); // делаем шрифт жирным
 	// настройки текста индикаторов игры
 	dashboardFont.loadFromFile(dashboardFontName); // загружаем шрифт
 	dashboardText.setFont(dashboardFont);// устанавливаем шрифт для текста
@@ -179,7 +181,7 @@ void PrepareFonts(string headerFontName, string dashboardFontName)
 	// получаем границы текстовой строки заголовка. textBounds.width - ширина текста в пикселях
 	sf::FloatRect textBounds = headerText.getLocalBounds();
 	float x = wSize.x / 2 - textBounds.width / 2;
-	headerText.setPosition(sf::Vector2f(x, 5));  // позиционируем заголовок
+	headerText.setPosition(sf::Vector2f(x, 5)); // позиционируем заголовок
 }
 
 // функция, перерисовывающая образ лабиринта. Используется взамен PrintMaze
@@ -200,13 +202,13 @@ void RedrawMaze(int maze[LY][LX], int width, int height)
 		for (int i = 0; i < width; i++)
 		{
 			// получаем из матрицы лабиринта код отрисовываемого объекта
-			int index = maze[j][i]; 
+			int index = maze[j][i];
 			// Задаем спрайту позицию в окне. Позиция равна по х - номеру текущего столбца
 			// умноженного на размер спрайта по горизонтали. По у - номеру строки, умноженному
 			// на размер спрайта по вертикали
 			sprites[index].setPosition(sf::Vector2f(xMaze + i * sprSize, yMaze + j * sprSize));
 			// отрисовываем спрайт
-			if (index>0) window.draw(sprites[index]);
+			if (index > 0) window.draw(sprites[index]);
 		}
 	}
 }
@@ -231,7 +233,7 @@ void Move(int dx, int dy)
 		playerPos.x + dx >= 0 && playerPos.x + dx < LX)
 	{
 		if (maze[playerPos.y + dy][playerPos.x + dx] != 1) // проверяем, есть ли в позиции перемещения
-		{                                                  // стенка, и если нет - перемещаемся
+		{ // стенка, и если нет - перемещаемся
 			maze[playerPos.y][playerPos.x] = 0; // убираем игрока из лабиринта в текущей позиции
 			playerPos.x += dx; // изменяем координаты
 			playerPos.y += dy; // игрока
@@ -261,7 +263,7 @@ void HandleKeyboardEvents() // Обрабатываем события клав�
 	{
 		Move(1, 0);// идем вправо
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))  // вверх
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) // вверх
 	{
 		Move(0, -1);
 	}
@@ -273,7 +275,7 @@ void HandleKeyboardEvents() // Обрабатываем события клав�
 
 void RenderScene()
 {
-	window.draw(backgroundSprite);  // отрисовываем спрайт с фоновым изображением в буфере кадра
+	window.draw(backgroundSprite); // отрисовываем спрайт с фоновым изображением в буфере кадра
 	RedrawMaze(maze, LX, LY); // отрисовка лабиринта
 	window.draw(headerText); // Выводим заголовок игры
 	window.draw(scoreSprite); // Выводим спрайт счета
@@ -282,6 +284,7 @@ void RenderScene()
 	UpdateClock(gameClock.getElapsedTime()); // обновляем оставшееся время игры
 }
 
+// функия вывода сообщения о завершении игры
 void ShowMessageWindow(const string& text, sf::Color textColor = sf::Color::White, sf::Color backgroundColor = sf::Color::Blue, sf::Color frameColor = sf::Color::White, sf::Vector2f windowSize = { 600,300 })
 {
 	sf::Vector2u wSize = window.getSize();
@@ -293,14 +296,42 @@ void ShowMessageWindow(const string& text, sf::Color textColor = sf::Color::Whit
 
 	sf::RectangleShape rectangle(windowSize);
 	rectangle.setFillColor(backgroundColor);
+	rectangle.setOutlineThickness(5);
 	rectangle.setOutlineColor(frameColor);
 	rectangle.setPosition({ xRectangleCoords,yRectangleCoords });
 	dashboardText.setString(text);
 	dashboardText.setFillColor(textColor);
 	dashboardText.setPosition({ xTextCoords,yTextCoords });
+
 	window.draw(rectangle);
 	window.draw(dashboardText);
 }
+
+// функция поиска игрока и проверка валидации лабиринта
+bool FindFirstPlayerPosition(int maze[LY][LX], int sizeX, int sizeY, PlayerPosition& playerPos)
+{
+	int OnePlayer = 0;
+	int door = 0;
+	for (int i = 0; i < sizeY; i++) // цикл пробегает массив по строкам
+	{
+		for (int j = 0; j < sizeX; j++) // цикл пробегает массив по столбцам
+		{
+			if (maze[i][j] == 3)
+			{
+				OnePlayer++;
+				playerPos = { j,i };
+			}
+
+			if (maze[i][j] == 2)
+				door++;
+		}
+	}
+	if (OnePlayer == 1 && door >= 1)
+		return true;
+	else
+		return false;
+}
+
 
 int main()
 {
@@ -309,6 +340,8 @@ int main()
 	PrepareDashboardImage(scoreImage, timerImage); // готовим спрайты индикаторов игры
 	PrepareFonts(headerTextFile, dashboardTextFile); // готовим текст для вывода времени и счета
 	gameClock.restart(); // запускаем таймер с нуля
+	if (!FindFirstPlayerPosition(maze, LX, LY, playerPos))
+		gameState = 3;
 	while (window.isOpen()) // цикл обработки событий, пока окно программы не закрыто
 	{
 		sf::Event event; // описываем объект события
@@ -319,19 +352,20 @@ int main()
 		}
 		if (gameState != 0) // проверяем, не закончилась ли игра
 		{
-			// сообщаем о конце игры и закрываем окно
-			if (gameState == 1)
+			if (gameState == 1) // если игрок прошел лабиринт
 				ShowMessageWindow("\t\tCongratulations!\n You have passed the maze!\n\tPress escape to leave.");
-			else if (gameState == 2)
-				ShowMessageWindow("Time is over!\nYou lost!\n\tPress escape to leave.", sf::Color::Yellow, sf::Color::Red);
+			else if (gameState == 2) // если игрок не успел пройти
+				ShowMessageWindow("\t\t Time is over!\n\t\t\t You lost!\n\tPress escape to leave.", sf::Color::Yellow, sf::Color(200, 0, 0)); // sf::Color(200,0,0) темно-красный цвет
+			else if (gameState == 3)
+				ShowMessageWindow("\n\tThe maze is not valid.", sf::Color::White, sf::Color::Black);
 			window.display();
-			while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape));
-			window.close();
+			while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)); // ожидаем нажатия клавиши Escape
+			window.close(); // закрываем окно
 		}
 		window.clear(); // очищаем окно
 		HandleKeyboardEvents(); // обработка событий клавиатуры
 		RenderScene(); // формируем (рендерим) сцену
-		window.display();  // отрисовка буфера экрана в окне
+		window.display(); // отрисовка буфера экрана в окне
 		Sleep(100); // пауза 100мс
 	}
 }
