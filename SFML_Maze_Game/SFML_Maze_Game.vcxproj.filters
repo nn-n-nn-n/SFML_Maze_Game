@@ -44,6 +44,15 @@
     <Image Include="assets\bitmaps\wall.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="assets\bitmaps\diamond.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\time.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="assets\bitmaps\mine.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\Novartis-Deco.ttf">
